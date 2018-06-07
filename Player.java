@@ -1,42 +1,70 @@
 import java.util.Scanner;
 
 public class Player {
-	String name1;
-	String name2;
+	String name;
+	int position;
+	Board board = new Board();
 	
-	public void playerName() {
-		
-		System.out.println("**********************************\n");
-		System.out.println("*** Welcome to Goose Game ***\n\n** it is a game for two players **");
-		System.out.println("\n**********************************\n");
-
-		System.out.println("Player1 please enter your name");
-		Scanner n1 = new Scanner(System.in);
-		name1 = n1.next();
-		System.out.println("Welcome "+ name1);
-		System.out.println("Player2 please enter your name");
-		Scanner n2 = new Scanner(System.in);
-		name2 = n2.next();
-		System.out.println("Welcome "+ name2);
+	
+	Player(String name){
+		this.name = name;
+	}
+	Player() {
 	}
 	
-	public void playerTurn() {
-		
-		System.out.println(name1 + " Please press r to roll the dice");
-		
-		while (true) {
-		Scanner n3 = new Scanner(System.in);
-		char roll = n3.next().charAt(0);
-		if (roll == 'r') {
-			
-			//System.out.println(Dice.randomDiceGenerator());
+void checkTurn() {
+	//this.position = position;
+	
 
-			
-		}else {
-			System.out.println("invalid entry please try again");
-		}
-		
-	}
-	}
 
+	
+	
 }
+	void well(int position) {
+
+	}
+
+	
+	boolean checkIfTrap(int position) {
+		for(int trap : board.traps) {
+			if(position == trap) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	void skipTurn() {
+		takeTurn(0);
+		
+	}
+	
+	
+
+	void takeTurn(int worp) {
+		position = position + worp;
+		if (checkIfTrap(position)) {
+			
+			switch (position) {
+			
+			case 6:
+				System.out.println("you reached the Bridge, Move to 12");
+				position = 12;
+				break;
+			case 19:
+				System.out.println("you reached the Hotel, Skip one turn");
+				//skipTurn();
+				break;
+				//default:
+					//takeTurn(position);
+			}
+		}
+		System.out.println("Player "+name+" is at "+ position);
+	
+	}
+}
+
+
+
+
+
